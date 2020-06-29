@@ -36,7 +36,8 @@ def baidu(company):
         print(str(i + 1) + '.' + title[i] + '(' + date[i] + '-' + source[i] + ')')
         print(href[i])
 
-    file1 = open('C:\\Users\DELL\Desktop\Python_Finance\MY test\ch3\数据挖掘报告.txt', 'a')  # 如果把a改成w的话，则每次生成txt的时候都会把原来的txt清空
+    #file1 = open('C:\\Users\DELL\Desktop\Python_Finance\MY test\ch3\数据挖掘报告.txt', 'a')  # 如果把a改成w的话，则每次生成txt的时候都会把原来的txt清空
+    file1 = open('数据挖掘报告.txt', 'a')  # 相对路径，如果把a改成w的话，则每次生成txt的时候都会把原来的txt清空
     file1.write(company + '数据挖掘completed！' + '\n' + '\n')
     for i in range(len(title)):
         file1.write(str(i + 1) + '.' + title[i] + '(' + date[i] + '-' + source[i] + ')' + '\n')
