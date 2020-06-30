@@ -8,12 +8,12 @@ Created on Sun Jun 28 23:51:07 2020
 import requests
 import re
 
-header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'}  # my browser
+my_header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'}  # my browser
 
 
 def baidu(company):
     url = 'https://www.baidu.com/s?rtt=1&bsst=1&cl=2&tn=news&word=' + company
-    res = requests.get(url, headers=header).text
+    res = requests.get(url, headers=my_header).text
     # print(res)
 
     p_info = '<p class="c-author">(.*?)</p>'
