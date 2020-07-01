@@ -22,8 +22,15 @@ db = pymysql.connect(host='localhost', port=3308, user='root', password='', data
 
 # 插入数据
 cur = db.cursor()  # 获取会话指针，用来调用SQL语句
+
 sql = 'INSERT INTO test(company, title, href, source, date) VALUES (%s, %s, %s, %s, %s)'  # 编写SQL语句
 cur.execute(sql, (company, title, href, source, date))  # 执行SQL语句
+
+'''直接执行 sql 方式
+sql = " INSERT INTO test(company, title, href, source, date) VALUES ('阿里巴巴', '测试1', '测试2', '测试3', '测试4') "  # 编写SQL语句
+cur.execute(sql)  # 执行SQL语句
+'''
+
 db.commit()  # 当改变表结构后，更新数据表的操作
 cur.close()  # 关闭会话指针
 db.close()  # 关闭数据库链接
