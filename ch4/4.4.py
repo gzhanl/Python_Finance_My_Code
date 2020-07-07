@@ -23,8 +23,10 @@ def baidu(company):
     # 正则表达式编写
     p_info = '<p class="c-author">(.*?)</p>'
     info = re.findall(p_info, res, re.S)
-    p_href = '<h3 class="c-title">.*?<a href="(.*?)"'
+   
+    p_href = '<h3 class="c-title">.*?<a href="(.*?)"' 
     href = re.findall(p_href, res, re.S)
+    
     p_title = '<h3 class="c-title">.*?>(.*?)</a>'
     title = re.findall(p_title, res, re.S)
 
