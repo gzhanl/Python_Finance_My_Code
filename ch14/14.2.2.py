@@ -1,6 +1,6 @@
 """
 获取多天的 前10 分钟 数据
-
+获取股票衍生变量数据
 """
 
 import tushare as ts
@@ -8,11 +8,13 @@ import pandas as pd
 
 pd.set_option('display.max_rows',100)
 pd.set_option('display.max_columns',50)
-pd.set_option('display.width',1000)
+pd.set_option('display.width',300)
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
 
 stock_code='000002'
 stock_name='万科A'
-start_date='2020-10-27'
+start_date='2020-10-25'
 end_date='2020-10-28'
 stock_k=ts.get_hist_data(stock_code,start=start_date,end=end_date)
 print(stock_k)
@@ -56,5 +58,18 @@ for current_date in stock_k.index:
 # 设置列的顺序
 col_order = ['名称', '开盘价', '收盘价', '股价涨跌幅(%)', '10分钟成交量']
 stock_table = stock_table[col_order]
+
+print(stock_table)
+
+'''2.下面开始获得股票衍生变量数据'''
+
+# 通过公式1获取成交量涨跌幅
+stock_table['昨日10分钟成交量'] = stock_table['10分钟成交量'].shift(-1)
+stock_table['成交量涨跌幅1(%)'] = (stock_table['10分钟成交量']-stock_table['昨日10分钟成交量'])/stock_table['昨日10分钟成交量']*100
+
+# 通过公式2获得成交量涨跌幅
+ten_mean = stock_table['10分钟成交量'].sort_index().rolling(10, min_periods=1).mean()
+stock_table['10分钟成交量10日均值'] = ten_mean
+stock_table['成交量涨跌幅2(%)'] = (stock_table['10分钟成交量']-stock_table['10分钟成交量10日均值'])/stock_table['10分钟成交量10日均值']*100
 
 print(stock_table)
