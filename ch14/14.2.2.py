@@ -61,11 +61,14 @@ stock_table = stock_table[col_order]
 
 print(stock_table)
 
+
 '''2.下面开始获得股票衍生变量数据'''
 
 # 通过公式1获取成交量涨跌幅
 stock_table['昨日10分钟成交量'] = stock_table['10分钟成交量'].shift(-1)
 stock_table['成交量涨跌幅1(%)'] = (stock_table['10分钟成交量']-stock_table['昨日10分钟成交量'])/stock_table['昨日10分钟成交量']*100
+print(stock_table)
+
 
 # 通过公式2获得成交量涨跌幅
 ten_mean = stock_table['10分钟成交量'].sort_index().rolling(10, min_periods=1).mean()
